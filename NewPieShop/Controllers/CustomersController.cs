@@ -9,22 +9,22 @@ using NewPieShop.Models;
 
 namespace NewPieShop.Controllers
 {
-    public class HomeController : Controller
+    public class CustomersController : Controller
     {
         private readonly NewPieShopContext _context;
 
-        public HomeController(NewPieShopContext context)
+        public CustomersController(NewPieShopContext context)
         {
             _context = context;
         }
 
-        // GET: Home
+        // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pie.ToListAsync());
+            return View(await _context.Customer.ToListAsync());
         }
 
-        // GET: Home/Details/5
+        // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace NewPieShop.Controllers
                 return NotFound();
             }
 
-            var pie = await _context.Pie
+            var customer = await _context.Customer
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (pie == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(pie);
+            return View(customer);
         }
 
-        // GET: Home/Create
+        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Home/Create
+        // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
+        public async Task<IActionResult> Create([Bind("Id,Name,AddressLine1,Town,County,PostCode")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pie);
+                _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pie);
+            return View(customer);
         }
 
-        // GET: Home/Edit/5
+        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace NewPieShop.Controllers
                 return NotFound();
             }
 
-            var pie = await _context.Pie.FindAsync(id);
-            if (pie == null)
+            var customer = await _context.Customer.FindAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
-            return View(pie);
+            return View(customer);
         }
 
-        // POST: Home/Edit/5
+        // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,AddressLine1,Town,County,PostCode")] Customer customer)
         {
-            if (id != pie.Id)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace NewPieShop.Controllers
             {
                 try
                 {
-                    _context.Update(pie);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PieExists(pie.Id))
+                    if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace NewPieShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(pie);
+            return View(customer);
         }
 
-        // GET: Home/Delete/5
+        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace NewPieShop.Controllers
                 return NotFound();
             }
 
-            var pie = await _context.Pie
+            var customer = await _context.Customer
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (pie == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(pie);
+            return View(customer);
         }
 
-        // POST: Home/Delete/5
+        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var pie = await _context.Pie.FindAsync(id);
-            _context.Pie.Remove(pie);
+            var customer = await _context.Customer.FindAsync(id);
+            _context.Customer.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PieExists(int id)
+        private bool CustomerExists(int id)
         {
-            return _context.Pie.Any(e => e.Id == id);
+            return _context.Customer.Any(e => e.Id == id);
         }
     }
 }

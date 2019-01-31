@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewPieShop.Models.Pie>
+﻿@model IEnumerable<NewPieShop.Models.Customer>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,22 +16,16 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ShortDescription)
+                @Html.DisplayNameFor(model => model.AddressLine1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LongDescription)
+                @Html.DisplayNameFor(model => model.Town)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.County)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThumbnailUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPieOfTheWeek)
+                @Html.DisplayNameFor(model => model.PostCode)
             </th>
             <th></th>
         </tr>
@@ -43,22 +37,16 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
+                @Html.DisplayFor(modelItem => item.AddressLine1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LongDescription)
+                @Html.DisplayFor(modelItem => item.Town)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.County)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPieOfTheWeek)
+                @Html.DisplayFor(modelItem => item.PostCode)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
