@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace NewPieShop.Models
 {
-    interface IPieRepository
+    public interface IPieRepository
     {
         List<Pie> GetPies();
         Pie GetPieById(int? id);
-        void AddNewPie();
-        void RemovePie(int? id);
+        void AddNewPie(Pie pie);
+        void UpdatePie(Pie pie);
+        void RemovePie(Pie pie);
     }
 }

@@ -11,29 +11,28 @@ namespace NewPieShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly NewPieShopContext _context;
+        private readonly IPieRepository _pieRepository;
 
-        public HomeController(NewPieShopContext context)
+        public HomeController(IPieRepository pieRepository)
         {
-            _context = context;
+            _pieRepository = pieRepository;
         }
 
         // GET: Home
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Pie.ToListAsync());
+            return View(_pieRepository.GetPies());
         }
 
         // GET: Home/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pie = await _context.Pie
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pie = _pieRepository.GetPieById(id);
             if (pie == null)
             {
                 return NotFound();
@@ -57,22 +56,21 @@ namespace NewPieShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(pie);
-                await _context.SaveChangesAsync();
+                _pieRepository.AddNewPie(pie);
                 return RedirectToAction(nameof(Index));
             }
             return View(pie);
         }
 
         // GET: Home/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pie = await _context.Pie.FindAsync(id);
+            var pie = _pieRepository.GetPieById(id);
             if (pie == null)
             {
                 return NotFound();
@@ -85,7 +83,7 @@ namespace NewPieShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
+        public IActionResult Edit(int id, [Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
         {
             if (id != pie.Id)
             {
@@ -96,8 +94,7 @@ namespace NewPieShop.Controllers
             {
                 try
                 {
-                    _context.Update(pie);
-                    await _context.SaveChangesAsync();
+                    _pieRepository.UpdatePie(pie);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,15 +113,14 @@ namespace NewPieShop.Controllers
         }
 
         // GET: Home/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var pie = await _context.Pie
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var pie = _pieRepository.GetPieById(id);
             if (pie == null)
             {
                 return NotFound();
@@ -136,17 +132,11 @@ namespace NewPieShop.Controllers
         // POST: Home/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var pie = await _context.Pie.FindAsync(id);
-            _context.Pie.Remove(pie);
-            await _context.SaveChangesAsync();
+            var pie = _pieRepository.GetPieById(id);
+            _pieRepository.RemovePie(pie);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool PieExists(int id)
-        {
-            return _context.Pie.Any(e => e.Id == id);
         }
     }
 }
