@@ -41,6 +41,7 @@ namespace NewPieShop
                     options.UseSqlServer(Configuration.GetConnectionString("NewPieShopContext")));
 
             services.AddTransient<IPieRepository, PieService>();
+            services.AddTransient<ICustomerRepository, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
