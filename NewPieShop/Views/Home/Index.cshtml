@@ -1,71 +1,29 @@
 ﻿@model IEnumerable<NewPieShop.Models.Pie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Home";
 }
 
-<h1>Index</h1>
+<h2>Welcome to the Pie Shop</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShortDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LongDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThumbnailUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsPieOfTheWeek)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsPieOfTheWeek)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <div class=" pie-list">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Details" asp-route-id="@item.Id">
+                <div class="each-pie">
+                    <h3>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </h3>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.ShortDescription)
+                    </p>
+                    <img src="~/img/@Html.DisplayFor(modelItem => item.ThumbnailUrl)" alt="tasty pie" />
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                </div>
+            </a>
+        }
+    </div>
+</div>

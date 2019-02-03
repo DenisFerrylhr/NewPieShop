@@ -2,55 +2,126 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    font-size: 14px;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
 }
+
+a {
+    color: #212529;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: #212529;
+    }
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
+.pie-list {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.each-pie {
+    width: 20rem;
+    min-height: 23.4rem;
+    text-align: center;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 0;
+    margin: 0;
+}
+
+    .each-pie h3 {
+        color: #ffffff;
+        background-color: #000000;
+        padding: 7px 0;
+    }
+
+    .each-pie p {
+        padding: 0 7px;
+        min-height: 48px;
+    }
+
+        .each-pie p:last-child {
+            background-color: #ccc;
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+    .each-pie img {
+        min-width: 225px;
+        max-width: 225px;
+        min-height: 225px;
+        max-height: 225px;
+    }
+
+.pie-detail-img img {
+    width: 700px;
+    height: 410px;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+@media (max-width: 768px) {
+
+    .pie-list {
+        flex-direction: column;
+    }
+
+    .each-pie {
+        width: unset;
+        margin-bottom: 3%;
+    }
 }
