@@ -11,31 +11,28 @@ namespace NewPieShop.Controllers
 {
     public class PurchasesController : Controller
     {
-        private readonly NewPieShopContext _context;
+        private readonly IPurchaseRepository _purchaseRepository;
 
-        public PurchasesController(NewPieShopContext context)
+        public PurchasesController(IPurchaseRepository purchaseRepository)
         {
-            _context = context;
+            _purchaseRepository = purchaseRepository;
         }
 
         // GET: Purchases
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var newPieShopContext = _context.Purchase.Include(p => p.Customer);
-            return View(await newPieShopContext.ToListAsync());
+            return View(_purchaseRepository.GetPurchases());
         }
 
         // GET: Purchases/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var purchase = await _context.Purchase
-                .Include(p => p.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var purchase = _purchaseRepository.GetPurchaseById(id);
             if (purchase == null)
             {
                 return NotFound();
@@ -47,7 +44,6 @@ namespace NewPieShop.Controllers
         // GET: Purchases/Create
         public IActionResult Create()
         {
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
             return View();
         }
 
@@ -56,32 +52,30 @@ namespace NewPieShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PieId,CustomerId")] Purchase purchase)
+        public IActionResult Create([Bind("Id,PieId,CustomerId")] Purchase purchase)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(purchase);
-                await _context.SaveChangesAsync();
+                _purchaseRepository.AddNewPurchase(purchase);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", purchase.CustomerId);
+            //ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", purchase.CustomerId);
             return View(purchase);
         }
 
         // GET: Purchases/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var purchase = await _context.Purchase.FindAsync(id);
+            var purchase = _purchaseRepository.GetPurchaseById(id);
             if (purchase == null)
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", purchase.CustomerId);
             return View(purchase);
         }
 
@@ -90,7 +84,7 @@ namespace NewPieShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PieId,CustomerId")] Purchase purchase)
+        public IActionResult Edit(int id, [Bind("Id,PieId,CustomerId")] Purchase purchase)
         {
             if (id != purchase.Id)
             {
@@ -101,8 +95,7 @@ namespace NewPieShop.Controllers
             {
                 try
                 {
-                    _context.Update(purchase);
-                    await _context.SaveChangesAsync();
+                    _purchaseRepository.UpdatePurchase(purchase);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,21 +110,18 @@ namespace NewPieShop.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", purchase.CustomerId);
             return View(purchase);
         }
 
         // GET: Purchases/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var purchase = await _context.Purchase
-                .Include(p => p.Customer)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var purchase = _purchaseRepository.GetPurchaseById(id);
             if (purchase == null)
             {
                 return NotFound();
@@ -143,17 +133,16 @@ namespace NewPieShop.Controllers
         // POST: Purchases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var purchase = await _context.Purchase.FindAsync(id);
-            _context.Purchase.Remove(purchase);
-            await _context.SaveChangesAsync();
+            var purchase = _purchaseRepository.GetPurchaseById(id);
+            _purchaseRepository.RemovePurchase(purchase);
             return RedirectToAction(nameof(Index));
         }
 
         private bool PurchaseExists(int id)
         {
-            return _context.Purchase.Any(e => e.Id == id);
+            return _purchaseRepository.GetPurchaseById(id) != null;
         }
     }
 }

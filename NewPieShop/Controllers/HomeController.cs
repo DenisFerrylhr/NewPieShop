@@ -52,7 +52,7 @@ namespace NewPieShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
+        public IActionResult Create([Bind("Id,Name,ShortDescription,LongDescription,Price,ImageUrl,ThumbnailUrl,IsPieOfTheWeek")] Pie pie)
         {
             if (ModelState.IsValid)
             {
@@ -137,6 +137,11 @@ namespace NewPieShop.Controllers
             var pie = _pieRepository.GetPieById(id);
             _pieRepository.RemovePie(pie);
             return RedirectToAction(nameof(Index));
+        }
+
+        private bool PieExists(int id)
+        {
+            return _pieRepository.GetPieById(id) != null;
         }
     }
 }
