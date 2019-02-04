@@ -55,12 +55,6 @@ namespace NewPieShop.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Purchase", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Purchase_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

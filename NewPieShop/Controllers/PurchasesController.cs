@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewPieShop.Models;
+using NewPieShop.ModelViews;
 
 namespace NewPieShop.Controllers
 {
     public class PurchasesController : Controller
     {
         private readonly IPurchaseRepository _purchaseRepository;
+        private readonly IPieRepository _pieRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public PurchasesController(IPurchaseRepository purchaseRepository)
+        public PurchasesController(IPurchaseRepository purchaseRepository, IPieRepository pieRepository, ICustomerRepository customerRepository)
         {
             _purchaseRepository = purchaseRepository;
+            _pieRepository = pieRepository;
+            _customerRepository = customerRepository;
         }
 
         // GET: Purchases
@@ -33,6 +38,12 @@ namespace NewPieShop.Controllers
             }
 
             var purchase = _purchaseRepository.GetPurchaseById(id);
+            PieCustomer pieCustomer = new PieCustomer
+            {
+                Pie = _pieRepository.GetPieById(purchase.PieId),
+                Customer = _customerRepository.GetCustomerById(purchase.CustomerId)
+            };
+
             if (purchase == null)
             {
                 return NotFound();
@@ -44,6 +55,8 @@ namespace NewPieShop.Controllers
         // GET: Purchases/Create
         public IActionResult Create()
         {
+            ViewData["PieId"] = new SelectList(_pieRepository.GetPies(), "Id", "Name");
+            ViewData["CustomerId"] = new SelectList(_customerRepository.GetCustomers(), "Id", "Name");
             return View();
         }
 
@@ -59,7 +72,6 @@ namespace NewPieShop.Controllers
                 _purchaseRepository.AddNewPurchase(purchase);
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id", purchase.CustomerId);
             return View(purchase);
         }
 

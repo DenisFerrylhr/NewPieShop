@@ -17,7 +17,7 @@ namespace NewPieShop.Models
         public void AddNewPurchase(Purchase purchase)
         {
             _context.Add(purchase);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public Purchase GetPurchaseById(int? id)
@@ -36,13 +36,13 @@ namespace NewPieShop.Models
         public void RemovePurchase(Purchase purchase)
         {
             _context.Purchase.Remove(purchase);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void UpdatePurchase(Purchase purchase)
         {
             _context.Update(purchase);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

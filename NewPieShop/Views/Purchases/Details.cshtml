@@ -1,4 +1,4 @@
-﻿@model NewPieShop.Models.Purchase
+﻿@model NewPieShop.ModelViews.PieCustomer
 
 @{
     ViewData["Title"] = "Details";
@@ -6,25 +6,53 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Purchase</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PieId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PieId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Customer.Id)
-        </dd>
-    </dl>
+<h2>Details</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>@Html.DisplayNameFor(model => model.Customer.Name) @Html.DisplayFor(model => model.Customer.Name)</h4>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Customer.AddressLine1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.AddressLine1)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Customer.Town)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.Town)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Customer.County)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.County)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Customer.PostCode)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Customer.PostCode)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>
+            @Html.DisplayFor(model => model.Pie.Name)
+        </h3>
+        <p>
+            @Html.DisplayFor(model => model.Pie.ShortDescription)
+        </p>
+        <img src="~/images/@Html.DisplayFor(model => model.Pie.ThumbnailUrl)" alt="tasty pie" />
+        <p>
+            @Html.DisplayFor(model => model.Pie.Price)
+        </p>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

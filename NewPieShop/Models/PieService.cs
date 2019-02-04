@@ -17,7 +17,7 @@ namespace NewPieShop.Models
         public void AddNewPie(Pie pie)
         {
             _context.Add(pie);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public Pie GetPieById(int? id)
@@ -36,13 +36,13 @@ namespace NewPieShop.Models
         public void RemovePie(Pie pie)
         {
             _context.Pie.Remove(pie);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void UpdatePie(Pie pie)
         {
             _context.Update(pie);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

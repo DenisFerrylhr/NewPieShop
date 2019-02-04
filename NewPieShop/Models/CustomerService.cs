@@ -17,7 +17,7 @@ namespace NewPieShop.Models
         public void AddNewCustomer(Customer customer)
         {
             _context.Add(customer);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public Customer GetCustomerById(int? id)
@@ -36,13 +36,13 @@ namespace NewPieShop.Models
         public void RemoveCustomer(Customer customer)
         {
             _context.Customer.Remove(customer);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void UpdateCustomer(Customer customer)
         {
             _context.Update(customer);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }
