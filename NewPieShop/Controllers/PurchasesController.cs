@@ -26,7 +26,20 @@ namespace NewPieShop.Controllers
         // GET: Purchases
         public IActionResult Index()
         {
-            return View(_purchaseRepository.GetPurchases());
+            List<PieCustomer> pieCustomers = new List<PieCustomer>();
+            foreach (Purchase purchase in _purchaseRepository.GetPurchases())
+            {
+                PieCustomer pieCustomer = new PieCustomer
+                {
+                    Pie = _pieRepository.GetPieById(purchase.PieId),
+                    Customer = _customerRepository.GetCustomerById(purchase.CustomerId),
+                    Purchase = purchase
+                };
+
+                pieCustomers.Add(pieCustomer);
+            }
+
+            return View(pieCustomers);
         }
 
         // GET: Purchases/Details/5
@@ -41,7 +54,8 @@ namespace NewPieShop.Controllers
             PieCustomer pieCustomer = new PieCustomer
             {
                 Pie = _pieRepository.GetPieById(purchase.PieId),
-                Customer = _customerRepository.GetCustomerById(purchase.CustomerId)
+                Customer = _customerRepository.GetCustomerById(purchase.CustomerId),
+                Purchase = purchase
             };
 
             if (purchase == null)
@@ -49,7 +63,7 @@ namespace NewPieShop.Controllers
                 return NotFound();
             }
 
-            return View(purchase);
+            return View(pieCustomer);
         }
 
         // GET: Purchases/Create
@@ -69,6 +83,7 @@ namespace NewPieShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                purchase.PurchaseDate = System.DateTime.Now;
                 _purchaseRepository.AddNewPurchase(purchase);
                 return RedirectToAction(nameof(Index));
             }
@@ -82,12 +97,13 @@ namespace NewPieShop.Controllers
             {
                 return NotFound();
             }
-
             var purchase = _purchaseRepository.GetPurchaseById(id);
             if (purchase == null)
             {
                 return NotFound();
             }
+            ViewData["PieId"] = new SelectList(_pieRepository.GetPies(), "Id", "Name", _pieRepository.GetPieById(purchase.PieId).Name);
+            ViewData["CustomerId"] = new SelectList(_customerRepository.GetCustomers(), "Id", "Name", _customerRepository.GetCustomerById(purchase.CustomerId).Name);
             return View(purchase);
         }
 

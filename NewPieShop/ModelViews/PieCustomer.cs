@@ -10,5 +10,6 @@ namespace NewPieShop.ModelViews
     {
         public Pie Pie { get; set; }
         public Customer Customer { get; set; }
+        public Purchase Purchase { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NewPieShop.Models.Purchase>
+﻿@model IEnumerable<NewPieShop.ModelViews.PieCustomer>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PieId)
+                @Html.DisplayNameFor(model => model.Pie.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                @Html.DisplayNameFor(model => model.Customer.Name)
             </th>
             <th></th>
         </tr>
@@ -25,15 +25,15 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PieId)
+                @Html.DisplayFor(modelItem => item.Pie.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
+                @Html.DisplayFor(modelItem => item.Customer.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Purchase.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Purchase.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Purchase.Id">Delete</a>
             </td>
         </tr>
 }

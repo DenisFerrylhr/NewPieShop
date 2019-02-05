@@ -9,6 +9,7 @@ namespace NewPieShop.Models
     public class Pie
     {
         public int Id { get; set; }
+        [Display(Name = "Pie Name")]
         public string Name { get; set; }
         [Display(Name = "Short Desccription")]
         public string ShortDescription { get; set; }
