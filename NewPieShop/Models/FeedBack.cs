@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace NewPieShop.Models
 {
-    public class Contact
+    public class Feedback
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string Comments { get; set; }
-
+        public string Message { get; set; }
+        public bool Contact { get; set; }
     }
 }
