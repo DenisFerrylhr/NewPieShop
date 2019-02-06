@@ -45,6 +45,10 @@ button.accept-policy {
     line-height: inherit;
 }
 
+.table {
+    background-color: #ffffff
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -53,6 +57,10 @@ html {
 }
 
 body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url('../img/pattern.png');
+    background-repeat: repeat;
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
@@ -72,6 +80,7 @@ body {
     border-bottom: 1px solid #000000;
     padding: 0;
     margin: 0;
+    background-color: #ffffff;
 }
 
     .each-pie h3 {
@@ -112,6 +121,7 @@ body {
     /* Set the fixed height of the footer here */
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
+    background-color: #ffffff
 }
 
 @media (max-width: 768px) {
