@@ -19,5 +19,7 @@ namespace NewPieShop.Models
         public DbSet<NewPieShop.Models.Pie> Pie { get; set; }
 
         public DbSet<NewPieShop.Models.Purchase> Purchase { get; set; }
+
+        public DbSet<NewPieShop.Models.Feedback> Feedback { get; set; }
     }
 }

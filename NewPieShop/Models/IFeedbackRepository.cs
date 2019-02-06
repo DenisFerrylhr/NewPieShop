@@ -7,6 +7,9 @@ namespace NewPieShop.Models
 {
     public interface IFeedbackRepository
     {
-        void AddNew(Feedback feedback);
+        List<Feedback> GetFeedbacks();
+        Feedback GetFeedbackById(int? id);
+        void AddNewFeedback(Feedback feedback);
+        void RemoveFeedback(Feedback feedback);
     }
 }
