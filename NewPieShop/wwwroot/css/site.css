@@ -113,6 +113,11 @@ body {
     height: 410px;
 }
 
+/* Feedback Form*/
+.feedback {
+    background-color: #ccc;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
