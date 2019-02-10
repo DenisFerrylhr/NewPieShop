@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using NewPieShop.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace NewPieShop
 {
@@ -40,6 +41,9 @@ namespace NewPieShop
             services.AddDbContext<NewPieShopContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("NewPieShopContext")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<NewPieShopContext>();
+
             services.AddTransient<IPieRepository, PieService>();
             services.AddTransient<ICustomerRepository, CustomerService>();
             services.AddTransient<IPurchaseRepository, PurchaseService>();
@@ -63,6 +67,8 @@ namespace NewPieShop
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
