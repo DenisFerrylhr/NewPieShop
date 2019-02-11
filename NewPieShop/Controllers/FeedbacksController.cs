@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace NewPieShop.Controllers
             _feedbackRepository = feedbackRepository;
         }
 
+        [Authorize]
         // GET: Feedbacks
         public IActionResult Index()
         {
@@ -25,6 +27,7 @@ namespace NewPieShop.Controllers
         }
 
         // GET: Feedbacks/Details/5
+        [Authorize]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -63,6 +66,7 @@ namespace NewPieShop.Controllers
         }
 
         // GET: Feedbacks/Delete/5
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -80,6 +84,7 @@ namespace NewPieShop.Controllers
         }
 
         // POST: Feedbacks/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)

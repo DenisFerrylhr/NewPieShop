@@ -44,6 +44,8 @@ namespace NewPieShop
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<NewPieShopContext>();
 
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/");
+
             services.AddTransient<IPieRepository, PieService>();
             services.AddTransient<ICustomerRepository, CustomerService>();
             services.AddTransient<IPurchaseRepository, PurchaseService>();

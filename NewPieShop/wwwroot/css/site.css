@@ -75,7 +75,8 @@ body {
     background-color: #ffffff;
 }
 
-    .each-pie h3 {
+    .each-pie p:first-child {
+        font-size: 1.6rem;
         color: #ffffff;
         background-color: #000000;
         padding: 7px 0;
@@ -99,7 +100,7 @@ body {
 }
 
 .responsive {
-    width: 100%;
+    width: 70%;
     height: auto;
 }
 
