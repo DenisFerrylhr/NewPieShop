@@ -65,6 +65,10 @@ body {
     margin-bottom: 60px;
 }
 
+.rotate15 {
+    transform: rotate(15deg);
+}
+
 .each-pie {
     min-height: 23.4rem;
     margin-bottom: 22px;
