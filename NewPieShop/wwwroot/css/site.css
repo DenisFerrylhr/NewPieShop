@@ -65,21 +65,13 @@ body {
     margin-bottom: 60px;
 }
 
-.pie-list {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-}
-
 .each-pie {
-    width: 20rem;
     min-height: 23.4rem;
+    margin-bottom: 22px;
     text-align: center;
     border-left: 1px solid #000000;
     border-right: 1px solid #000000;
     border-bottom: 1px solid #000000;
-    padding: 0;
-    margin: 0;
     background-color: #ffffff;
 }
 
@@ -101,16 +93,14 @@ body {
             padding-bottom: 0;
         }
 
-    .each-pie img {
-        min-width: 225px;
-        max-width: 225px;
-        min-height: 225px;
-        max-height: 225px;
-    }
-
 .pie-detail-img img {
     width: 700px;
     height: 410px;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
 }
 
 /* Feedback Form*/
@@ -127,16 +117,4 @@ body {
     height: 60px;
     line-height: 60px; /* Vertically center the text there */
     background-color: #ffffff
-}
-
-@media (max-width: 768px) {
-
-    .pie-list {
-        flex-direction: column;
-    }
-
-    .each-pie {
-        width: unset;
-        margin-bottom: 3%;
-    }
 }

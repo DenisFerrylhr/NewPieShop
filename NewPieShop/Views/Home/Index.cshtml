@@ -6,10 +6,10 @@
 
 <h2>Welcome to the Pie Shop</h2>
 
-<div class="container">
-    <div class=" pie-list">
-        @foreach (var item in Model)
-        {
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
             <a asp-action="Details" asp-route-id="@item.Id">
                 <div class="each-pie">
                     <h3>
@@ -18,12 +18,12 @@
                     <p>
                         @Html.DisplayFor(modelItem => item.ShortDescription)
                     </p>
-                    <img src="~/img/@Html.DisplayFor(modelItem => item.ThumbnailUrl)" alt="tasty pie" />
+                    <img class="responsive" src="~/img/@Html.DisplayFor(modelItem => item.ThumbnailUrl)" alt="tasty pie" />
                     <p>
                         @Html.DisplayFor(modelItem => item.Price)
                     </p>
                 </div>
             </a>
-        }
-    </div>
+        </div>
+    }
 </div>
