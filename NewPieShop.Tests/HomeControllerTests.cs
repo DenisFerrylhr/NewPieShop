@@ -3,9 +3,7 @@ using NewPieShop.Controllers;
 using NewPieShop.Models;
 using NewPieShop.Tests.MockRepos;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NewPieShop.Tests
 {
