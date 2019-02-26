@@ -21,8 +21,8 @@ namespace NewPieShop.Tests
             List<Pie> pies = result.ViewData.Model as List<Pie>;
 
             Assert.IsInstanceOf<ViewResult>(result);
-            Assert.IsAssignableFrom<IEnumerable<Pie>>(result.ViewData.Model);
-            Assert.Equals(4, pies.Count);
+            Assert.IsAssignableFrom<List<Pie>>(result.ViewData.Model);
+            Assert.AreEqual(4, pies.Count);
         }
     }
 }
